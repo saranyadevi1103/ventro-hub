@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Product • VentroHub</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<header class="header">
+  <div class="container nav">
+    <div class="brand"><div class="brand-logo">V</div><div class="brand-name">VentroHub</div></div>
+    <nav class="menu">
+      <a href="index.html">Home</a>
+      <a href="products.html">Products</a>
+      <a href="blog.html">Blog</a>
+      <a href="about.html">About</a>
+    </nav>
+    <div class="auth">
+      <div id="userArea"></div>
+      <a href="cart.html" class="btn">Cart <span id="cartCount">0</span></a>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+  <div class="detail detail-card">
+    <div><img id="pImage" src="" alt="Product"></div>
+    <div class="detail-body">
+      <div id="pName" class="detail-name">Product Name</div>
+      <div id="pPrice" class="detail-price">₹0</div>
+      <div id="pDesc" class="detail-desc">Curated lifestyle essential with a premium aesthetic.</div>
+      <div class="card-actions">
+        <button id="addBtn" class="btn">Add to Cart</button>
+        <a id="buyBtn" class="btn" href="cart.html">Buy Now</a>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="footer container">VentroHub • Crafted for elegance</footer>
+
+<script type="module" src="js/app.js"></script>
+<script type="module">
+  import { getParam, formatINR, ls, toast } from "./js/utils.js";
+  (async function(){
+    const id = Number(getParam("id"));
+    const res = await fetch("./data/products.json");
+    const products = await res.json();
+    const p = products.find(x => x.id === id);
+    if (!p) return;
+    document.getElementById("pImage").src = p.image;
+    document.getElementById("pName").textContent = p.name;
+    document.getElementById("pPrice").textContent = formatINR(p.price);
+    document.getElementById("addBtn").addEventListener("click", () => {
+      const cart = ls.get("vh_cart", []);
+      const found = cart.find(c => c.id === id);
+      if (found) found.qty += 1;
+      else cart.push({ id: p.id, name: p.name, price: p.price, image: p.image, qty: 1 });
+      ls.set("vh_cart", cart);
+      toast("Added to cart.");
+      location.href = "cart.html";
+    });
+  })();
+</script>
+</body>
+</html>
