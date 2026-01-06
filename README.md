@@ -1,24 +1,22 @@
 # VentroHub
 
-VentroHub is a full-stack lifestyle e-commerce web application developed using core web technologies.
+VentroHub is a lifestyle e-commerce website built using HTML, CSS, and JavaScript.
 
 ## Features
-- Product listing with categories
+- Product categories & filters
 - Product detail pages
-- User login and signup
-- Cart and checkout system
-- Blog and informational pages
-- Responsive UI design
+- User authentication
+- Cart & checkout
+- Blog & about pages
 
-## Tech Stack
-- Frontend: HTML, CSS, JavaScript
-- Backend: Node.js, Express
-- Database: JSON (Local)
+## Folder Structure
+- assets → product images
+- css → styles
+- js → application logic
+- data → products data
 
 ## How to Run
-1. Clone the repository
-2. Open frontend/index.html in browser
-3. Run backend using Node.js
+Open index.html using Live Server.
 
 ## Author
 Saranya
